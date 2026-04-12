@@ -308,21 +308,42 @@ const Footer = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void 
 
 const EnquiryModal = ({ isOpen, onClose, initialTemplate }: { isOpen: boolean; onClose: () => void; initialTemplate: string }) => {
   const [submitted, setSubmitted] = useState(false);
-  const [details, setDetails] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    businessType: "",
+    details: ""
+  });
 
   // Update details when modal opens
   useEffect(() => {
     if (isOpen) {
-      setDetails(initialTemplate);
+      setFormData(prev => ({ ...prev, details: initialTemplate }));
     }
   }, [isOpen, initialTemplate]);
 
-  const handleDetailsChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setDetails(e.target.value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    
+    // Construct mailto link
+    const subject = encodeURIComponent(`MStudio Enquiry from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Business Type: ${formData.businessType}\n\n` +
+      `Project Details:\n${formData.details}`
+    );
+    
+    const mailtoLink = `mailto:mujib.nizar@outlook.com?subject=${subject}&body=${body}`;
+    
+    // Trigger mailto
+    window.location.href = mailtoLink;
+    
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -364,9 +385,9 @@ const EnquiryModal = ({ isOpen, onClose, initialTemplate }: { isOpen: boolean; o
                   <div className="w-20 h-20 bg-apple-blue/10 text-apple-blue rounded-full flex items-center justify-center mx-auto mb-6">
                     <Check size={40} />
                   </div>
-                  <h3 className="text-3xl font-bold mb-4">Message Sent!</h3>
+                  <h3 className="text-3xl font-bold mb-4">Opening Email App...</h3>
                   <p className="text-apple-dark/60 text-lg">
-                    Thank you for reaching out. I'll get back to you within 24 hours.
+                    I've prepared the email for you. Please click "Send" in your email application.
                   </p>
                 </motion.div>
               ) : (
@@ -380,7 +401,10 @@ const EnquiryModal = ({ isOpen, onClose, initialTemplate }: { isOpen: boolean; o
                       <label className="text-sm font-semibold text-apple-dark/80 ml-1">Full Name</label>
                       <input 
                         required
+                        name="name"
                         type="text" 
+                        value={formData.name}
+                        onChange={handleChange}
                         placeholder="John Doe"
                         className="w-full px-5 py-4 bg-apple-gray-50 border border-apple-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-apple-blue/20 focus:border-apple-blue transition-all"
                       />
@@ -389,7 +413,10 @@ const EnquiryModal = ({ isOpen, onClose, initialTemplate }: { isOpen: boolean; o
                       <label className="text-sm font-semibold text-apple-dark/80 ml-1">Email Address</label>
                       <input 
                         required
+                        name="email"
                         type="email" 
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder="john@example.com"
                         className="w-full px-5 py-4 bg-apple-gray-50 border border-apple-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-apple-blue/20 focus:border-apple-blue transition-all"
                       />
@@ -398,7 +425,10 @@ const EnquiryModal = ({ isOpen, onClose, initialTemplate }: { isOpen: boolean; o
                       <label className="text-sm font-semibold text-apple-dark/80 ml-1">Business Type</label>
                       <input 
                         required
+                        name="businessType"
                         type="text" 
+                        value={formData.businessType}
+                        onChange={handleChange}
                         placeholder="e.g. Cafe, Workshop, Startup"
                         className="w-full px-5 py-4 bg-apple-gray-50 border border-apple-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-apple-blue/20 focus:border-apple-blue transition-all"
                       />
@@ -407,9 +437,10 @@ const EnquiryModal = ({ isOpen, onClose, initialTemplate }: { isOpen: boolean; o
                       <label className="text-sm font-semibold text-apple-dark/80 ml-1">Project Details</label>
                       <textarea 
                         required
+                        name="details"
                         rows={4}
-                        value={details}
-                        onChange={handleDetailsChange}
+                        value={formData.details}
+                        onChange={handleChange}
                         placeholder="Tell me what you need..."
                         className="w-full px-5 py-4 bg-apple-gray-50 border border-apple-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-apple-blue/20 focus:border-apple-blue transition-all resize-none"
                       />
