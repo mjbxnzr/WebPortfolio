@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Check, ArrowRight, Mail, Linkedin, Globe, Zap, Smartphone, ShieldCheck, X, Send } from "lucide-react";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect, ChangeEvent } from "react";
 
-const Navbar = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
+const Navbar = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void }) => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 apple-blur border-b border-apple-gray-100">
       <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
@@ -15,7 +15,7 @@ const Navbar = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
           <a href="#pricing" className="hover:text-apple-blue transition-colors">Pricing</a>
           <div className="flex items-center space-x-4">
             <button 
-              onClick={onOpenEnquiry}
+              onClick={() => onOpenEnquiry()}
               className="bg-apple-blue text-white px-4 py-1.5 rounded-full hover:bg-apple-blue/90 transition-colors flex items-center space-x-2 cursor-pointer"
             >
               <Mail size={16} />
@@ -27,7 +27,7 @@ const Navbar = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
           </div>
         </div>
         <div className="md:hidden flex items-center space-x-4">
-           <button onClick={onOpenEnquiry} className="text-apple-blue cursor-pointer">
+           <button onClick={() => onOpenEnquiry()} className="text-apple-blue cursor-pointer">
             <Mail size={24} />
            </button>
            <a href="https://www.linkedin.com/in/mujibnizar" target="_blank" rel="noopener noreferrer" className="text-apple-dark">
@@ -39,7 +39,7 @@ const Navbar = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
   );
 };
 
-const Hero = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
+const Hero = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void }) => {
   return (
     <section className="pt-32 pb-20 px-6 md:pt-48 md:pb-32 overflow-hidden">
       <div className="max-w-5xl mx-auto text-center">
@@ -66,7 +66,7 @@ const Hero = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
           className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4"
         >
           <button 
-            onClick={onOpenEnquiry}
+            onClick={() => onOpenEnquiry()}
             className="inline-flex items-center space-x-2 bg-apple-dark text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-apple-dark/90 transition-all transform hover:scale-105 w-full sm:w-auto justify-center cursor-pointer"
           >
             <Mail size={20} />
@@ -136,28 +136,31 @@ const ProblemSolution = () => {
   );
 };
 
-const Pricing = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
+const Pricing = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void }) => {
   const plans = [
     {
       name: "Starter",
       price: "500",
       features: ["1 Page Website", "WhatsApp Button", "Mobile Friendly", "Basic SEO", "3 Days Delivery"],
       cta: "Start Now",
-      popular: false
+      popular: false,
+      template: "Hi MStudio! I'm interested in the Starter Package (RM500). I'd like to build a 1-page website for my business."
     },
     {
       name: "Business",
       price: "1,200",
       features: ["3–5 Pages", "Contact Form", "Standard SEO", "Custom Graphics", "5 Days Delivery"],
       cta: "Go Business",
-      popular: true
+      popular: true,
+      template: "Hi MStudio! I'm interested in the Business Package (RM1,200). I need a 3-5 page website with a contact form and SEO."
     },
     {
       name: "Pro",
       price: "2,000",
       features: ["Custom Design", "Performance Optimized", "Advanced SEO", "Priority Support", "7 Days Delivery"],
       cta: "Get Pro",
-      popular: false
+      popular: false,
+      template: "Hi MStudio! I'm interested in the Pro Package (RM2,000). I'm looking for a custom, high-performance design with advanced SEO."
     }
   ];
 
@@ -195,7 +198,7 @@ const Pricing = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
                 ))}
               </ul>
               <button 
-                onClick={onOpenEnquiry}
+                onClick={() => onOpenEnquiry(p.template)}
                 className={`w-full py-4 rounded-full text-center font-bold transition-all cursor-pointer ${p.popular ? 'bg-apple-blue text-white hover:bg-apple-blue/90' : 'bg-apple-gray-50 text-apple-dark hover:bg-apple-gray-100'}`}
               >
                 {p.cta}
@@ -236,14 +239,14 @@ const Process = () => {
   );
 };
 
-const FinalCTA = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
+const FinalCTA = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void }) => {
   return (
     <section className="section-padding bg-apple-dark text-white">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl md:text-6xl font-bold mb-8">Have a business idea? Let's build your website today.</h2>
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
           <button 
-            onClick={onOpenEnquiry}
+            onClick={() => onOpenEnquiry()}
             className="inline-flex items-center space-x-2 bg-white text-apple-dark px-10 py-5 rounded-full text-xl font-bold hover:bg-apple-gray-50 transition-all transform hover:scale-105 w-full sm:w-auto justify-center cursor-pointer"
           >
             <Mail size={24} />
@@ -282,7 +285,7 @@ const FinalCTA = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
   );
 };
 
-const Footer = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
+const Footer = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void }) => {
   return (
     <footer className="py-12 px-6 border-t border-apple-gray-100">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
@@ -296,15 +299,27 @@ const Footer = ({ onOpenEnquiry }: { onOpenEnquiry: () => void }) => {
         <div className="flex space-x-6 text-sm font-medium text-apple-dark/60">
           <a href="#" className="hover:text-apple-blue">Privacy</a>
           <a href="#" className="hover:text-apple-blue">Terms</a>
-          <button onClick={onOpenEnquiry} className="hover:text-apple-blue cursor-pointer">Contact</button>
+          <button onClick={() => onOpenEnquiry()} className="hover:text-apple-blue cursor-pointer">Contact</button>
         </div>
       </div>
     </footer>
   );
 };
 
-const EnquiryModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+const EnquiryModal = ({ isOpen, onClose, initialTemplate }: { isOpen: boolean; onClose: () => void; initialTemplate: string }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [details, setDetails] = useState("");
+
+  // Update details when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setDetails(initialTemplate);
+    }
+  }, [isOpen, initialTemplate]);
+
+  const handleDetailsChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setDetails(e.target.value);
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -393,6 +408,8 @@ const EnquiryModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                       <textarea 
                         required
                         rows={4}
+                        value={details}
+                        onChange={handleDetailsChange}
                         placeholder="Tell me what you need..."
                         className="w-full px-5 py-4 bg-apple-gray-50 border border-apple-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-apple-blue/20 focus:border-apple-blue transition-all resize-none"
                       />
@@ -417,8 +434,12 @@ const EnquiryModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
 
 export default function App() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [enquiryTemplate, setEnquiryTemplate] = useState("");
 
-  const toggleEnquiry = () => setIsEnquiryOpen(!isEnquiryOpen);
+  const toggleEnquiry = (template?: string) => {
+    setEnquiryTemplate(template || "");
+    setIsEnquiryOpen(true);
+  };
 
   return (
     <div className="min-h-screen selection:bg-apple-blue/20">
@@ -431,7 +452,12 @@ export default function App() {
         <FinalCTA onOpenEnquiry={toggleEnquiry} />
       </main>
       <Footer onOpenEnquiry={toggleEnquiry} />
-      <EnquiryModal isOpen={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />
+      <EnquiryModal 
+        isOpen={isEnquiryOpen} 
+        onClose={() => setIsEnquiryOpen(false)} 
+        initialTemplate={enquiryTemplate}
+      />
     </div>
   );
 }
+
