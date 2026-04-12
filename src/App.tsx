@@ -5,7 +5,10 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 apple-blur border-b border-apple-gray-100">
       <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-        <div className="font-semibold text-xl tracking-tight">MStudio</div>
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-apple-blue rounded-lg flex items-center justify-center text-white font-bold text-lg">M</div>
+          <div className="font-semibold text-xl tracking-tight">MStudio</div>
+        </div>
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-apple-dark/80">
           <a href="#services" className="hover:text-apple-blue transition-colors">Services</a>
           <a href="#pricing" className="hover:text-apple-blue transition-colors">Pricing</a>
@@ -279,7 +282,10 @@ const Footer = () => {
   return (
     <footer className="py-12 px-6 border-t border-apple-gray-100">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-        <div className="text-xl font-bold">MStudio</div>
+        <div className="flex items-center space-x-2">
+          <div className="w-6 h-6 bg-apple-blue rounded flex items-center justify-center text-white font-bold text-sm">M</div>
+          <div className="text-xl font-bold">MStudio</div>
+        </div>
         <div className="text-apple-dark/40 text-sm">
           © {new Date().getFullYear()} MStudio. Built for Malaysian SMEs.
         </div>
