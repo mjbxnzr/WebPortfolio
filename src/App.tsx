@@ -132,10 +132,24 @@ const ProblemSolution = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="bg-white p-8 rounded-3xl shadow-sm border border-apple-gray-100"
+              whileHover="hover"
+              variants={{
+                hover: { y: -5 }
+              }}
+              className="bg-white p-8 rounded-3xl shadow-sm border border-apple-gray-100 cursor-default"
             >
-              <div className="mb-4">{f.icon}</div>
+              <motion.div 
+                variants={{
+                  hover: { 
+                    scale: 1.15, 
+                    rotate: 8,
+                    transition: { type: "spring", stiffness: 400, damping: 10 } 
+                  }
+                }}
+                className="mb-4 inline-block"
+              >
+                {f.icon}
+              </motion.div>
               <h3 className="text-xl font-semibold mb-2">{f.title}</h3>
               <p className="text-apple-dark/60 leading-relaxed">{f.desc}</p>
             </motion.div>
@@ -274,7 +288,7 @@ const Process = () => {
 
 const FinalCTA = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void }) => {
   return (
-    <section className="section-padding bg-apple-dark text-white">
+    <section className="section-padding bg-apple-dark text-white animate-gradient bg-gradient-to-r from-apple-dark via-[#2d2d2f] to-apple-dark">
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
