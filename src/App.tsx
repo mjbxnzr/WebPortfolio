@@ -49,7 +49,7 @@ const Hero = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void })
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-5xl md:text-7xl font-bold tracking-tight mb-6"
         >
-          Get a professional website for your business — from <span className="text-apple-blue">RM500</span>
+          Get a professional website for your business from <span className="text-apple-blue">RM500</span>
         </motion.h1>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -297,9 +297,9 @@ const Footer = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void 
           © {new Date().getFullYear()} MStudio. Built for Malaysian SMEs.
         </div>
         <div className="flex space-x-6 text-sm font-medium text-apple-dark/60">
-          <a href="#" className="hover:text-apple-blue">Privacy</a>
-          <a href="#" className="hover:text-apple-blue">Terms</a>
-          <button onClick={() => onOpenEnquiry()} className="hover:text-apple-blue cursor-pointer">Contact</button>
+          <a href="#" className="hover:text-apple-blue transition-colors">Privacy</a>
+          <a href="#" className="hover:text-apple-blue transition-colors">Terms</a>
+          <button onClick={() => onOpenEnquiry()} className="hover:text-apple-blue transition-colors cursor-pointer">Contact</button>
         </div>
       </div>
     </footer>
@@ -371,7 +371,7 @@ const EnquiryModal = ({ isOpen, onClose, initialTemplate }: { isOpen: boolean; o
             <div className="p-8 md:p-12">
               <button 
                 onClick={onClose}
-                className="absolute top-6 right-6 text-apple-dark/40 hover:text-apple-dark transition-colors"
+                className="absolute top-6 right-6 text-apple-dark/40 hover:text-apple-dark transition-colors cursor-pointer"
               >
                 <X size={24} />
               </button>
@@ -447,7 +447,7 @@ const EnquiryModal = ({ isOpen, onClose, initialTemplate }: { isOpen: boolean; o
                     </div>
                     <button 
                       type="submit"
-                      className="w-full bg-apple-blue text-white py-5 rounded-2xl font-bold text-lg hover:bg-apple-blue/90 transition-all flex items-center justify-center space-x-2 group"
+                      className="w-full bg-apple-blue text-white py-5 rounded-2xl font-bold text-lg hover:bg-apple-blue/90 transition-all flex items-center justify-center space-x-2 group cursor-pointer"
                     >
                       <span>Send Enquiry</span>
                       <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
