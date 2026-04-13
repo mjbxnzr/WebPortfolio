@@ -113,7 +113,13 @@ const ProblemSolution = () => {
 
   return (
     <section id="services" className="bg-apple-gray-50 section-padding">
-      <div className="max-w-7xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto"
+      >
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Why your business needs a website</h2>
           <p className="text-xl text-apple-dark/60">Stop losing customers to competitors who are easier to find.</p>
@@ -122,6 +128,10 @@ const ProblemSolution = () => {
           {features.map((f, i) => (
             <motion.div 
               key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -5 }}
               className="bg-white p-8 rounded-3xl shadow-sm border border-apple-gray-100"
             >
@@ -131,7 +141,7 @@ const ProblemSolution = () => {
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -166,15 +176,25 @@ const Pricing = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void
 
   return (
     <section id="pricing" className="section-padding">
-      <div className="max-w-7xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto"
+      >
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Simple, transparent pricing</h2>
           <p className="text-xl text-apple-dark/60">Choose the plan that fits your business stage.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {plans.map((p, i) => (
-            <div 
+            <motion.div 
               key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
               className={`relative p-10 rounded-3xl border-2 ${p.popular ? 'border-apple-blue shadow-xl' : 'border-apple-gray-100'} flex flex-col`}
             >
               {p.popular && (
@@ -203,10 +223,10 @@ const Pricing = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void
               >
                 {p.cta}
               </button>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -220,21 +240,34 @@ const Process = () => {
 
   return (
     <section className="section-padding">
-      <div className="max-w-7xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto"
+      >
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Simple 3-step process</h2>
           <p className="text-xl text-apple-dark/60">Getting your business online shouldn't be complicated.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {steps.map((s, i) => (
-            <div key={i} className="relative">
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.2 }}
+              className="relative"
+            >
               <div className="text-8xl font-bold text-apple-gray-100 absolute -top-10 -left-4 -z-10">{s.num}</div>
               <h3 className="text-2xl font-bold mb-4">{s.title}</h3>
               <p className="text-lg text-apple-dark/60 leading-relaxed">{s.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -242,7 +275,13 @@ const Process = () => {
 const FinalCTA = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => void }) => {
   return (
     <section className="section-padding bg-apple-dark text-white">
-      <div className="max-w-4xl mx-auto text-center">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-4xl mx-auto text-center"
+      >
         <h2 className="text-4xl md:text-6xl font-bold mb-8">Have a business idea? Let's build your website today.</h2>
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
           <button 
@@ -280,7 +319,7 @@ const FinalCTA = ({ onOpenEnquiry }: { onOpenEnquiry: (template?: string) => voi
             <span>Support included</span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
